@@ -22,9 +22,6 @@ name_list = []
 for i in professions.json():
     for id in i['specializations']:
         id_list.append(id["id"])
-
-for i in professions.json():
-    for id in i['specializations']:
         name_list.append(id["name"])
 
 diction = dict(zip(id_list, name_list))
