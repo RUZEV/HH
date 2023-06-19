@@ -22,7 +22,7 @@ def create_dict(diction):
             id_list.append(id["id"])
             name_list.append(id["name"])
     diction = dict(zip(id_list, name_list))
-    print(diction)
     return diction
 
-create_dict({})
+dict_proffession = create_dict(diction={})
+print(dict_proffession)
