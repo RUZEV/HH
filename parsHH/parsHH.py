@@ -1,6 +1,6 @@
 import requests
 
-def fetch(url, params):
+def get_all_dict(url, params):
     headers = params["headers"]
     body = params['body']
     if params["method"] == "GET":
@@ -8,7 +8,7 @@ def fetch(url, params):
     if params["method"] == 'POST':
         return requests.post(url, headers=headers, data=body)
 def create_dict(diction):
-    professions = fetch("https://api.hh.ru/specializations", {
+    professions = get_all_dict("https://api.hh.ru/specializations", {
         "headers": {
             "User-Agent": "MyApp/1.0"
         },
