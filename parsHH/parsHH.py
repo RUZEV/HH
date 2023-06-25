@@ -1,31 +1,28 @@
 import requests
 
-def fetch(url, params):
+def get_all_dict(url, params):
     headers = params["headers"]
     body = params['body']
     if params["method"] == "GET":
-        return requests.get(url, headers=headers)
+        return create_dict(requests.get(url, headers=headers))
     if params["method"] == 'POST':
-        return requests.post(url, headers=headers, data=body)
+        return create_dict(requests.post(url, headers=headers, data=body))
+def create_dict(diction):
+    professions = diction  #get_all_dict("https://api.hh.ru/specializations", {
+    #     "headers": {
+    #         "User-Agent": "MyApp/1.0"
+    #     },
+    #     "body": None,
+    #     "method": "GET"
+    # })
+    id_list = []
+    name_list = []
+    for i in professions.json():
+        for id in i['specializations']:
+            id_list.append(id["id"])
+            name_list.append(id["name"])
+    diction = dict(zip(id_list, name_list))
+    return diction
 
-professions = fetch("https://api.hh.ru/specializations", {
-  "headers": {
-    "User-Agent": "MyApp/1.0"
-  },
-  "body": None,
-  "method": "GET"
-})
-
-id_list = []
-name_list = []
-
-for i in professions.json():
-    for id in i['specializations']:
-        id_list.append(id["id"])
-
-for i in professions.json():
-    for id in i['specializations']:
-        name_list.append(id["name"])
-
-diction = dict(zip(name_list, id_list))
-print(diction)
+dict_proffession = create_dict(diction={})
+print(dict_proffession)
